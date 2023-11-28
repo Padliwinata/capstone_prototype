@@ -40,6 +40,16 @@ with right_column:
     income_tax_payable_2 = int(st.text_input('Income Tax Payable', '200000', key="b12"))
     depreciation_and_amortization_2 = int(st.text_input('Depreciation and Amortization', '200000', key="b13"))
 
+dsri = (account_receivables_2 / sales_2) / (account_receivables_1 / sales_1)
+gmi = ((sales_1 - cogs_1)/sales_1) / ((sales_2 - cogs_2)/sales_2)
+aqi = (1 - (current_assets_2 + ppe_2)/total_asset_2) / (1 - (current_assets_1 + ppe_1)/total_asset_1)
+sgi = sales_2 / sales_1
+depi = (depreciation_1 / (depreciation_1 + ppe_1)) / (depreciation_1 / (depreciation_2 + ppe_2))
+sgai = (sga_expense_2 / sales_2) / (sga_expense_1 / sales_1)
+lvgi = ((long_term_debt_2 + current_liabilities_2) / total_asset_2) / ((long_term_debt_1 + current_liabilities_1) / total_asset_1)
+tata = ((current_assets_2 - current_assets_1) - (cash_2 - cash_1) - ((current_liabilities_2 - current_liabilities_1) - (current_maturities_of_ltd_2 - current_maturities_of_ltd_1) - (income_tax_payable_2 - income_tax_payable_1) - depreciation_and_amortization_2)) / total_asset_2
+result = -4.84 + (0.920 * dsri) + (0.528 * gmi) + (0.404 * aqi) + (0.892 * sgi) + (0.115 * depi) - (0.172 * sgai) - (0.327 * lvgi) + (4.679 * tata)
+
 data = {
     "account_receivables_1": account_receivables_1,
     "sales_1": sales_1,
@@ -102,5 +112,5 @@ example_data = {
     "depreciation_and_amortization_2": depreciation_and_amortization_2
 }
 
-res = requests.post('https://fraud_detection-1-d1112249.deta.app/index', json=example_data)
-st.write(f"M score: {res.text}")
+# res = requests.post('https://fraud_detection-1-d1112249.deta.app/index', json=example_data)
+st.write(f"M score: {result}")
