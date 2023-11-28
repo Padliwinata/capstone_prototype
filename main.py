@@ -102,5 +102,5 @@ example_data = {
     "depreciation_and_amortization_2": depreciation_and_amortization_2
 }
 
-res = requests.post('http://127.0.0.1:8001/index', json=example_data)
+res = requests.post('https://fraud_detection-1-d1112249.deta.app/index', json=example_data)
 st.write(f"M score: {res.text}")
